@@ -59,7 +59,6 @@ h1{
   font-weight: 500;
   font-size: 50px;
   color: #000000;
-  opacity: 60%;
 }
 form{
   width: 80%;
