@@ -9,9 +9,8 @@
     </form>
     <ul>
       <li v-for="todo in todos" :key="todo">{{todo.title}} <button @click="remove(todo)" class="submit">Done</button></li>
-      <!-- <li>Walk Dog <button class="submit">Done</button></li>
-      <li>Walk Dog <button class="submit">Done</button></li> -->
     </ul>
+    <a href="https://github.com/dan-adekoya/Todo-app-vue">Repo link</a>
   </div>
 </template>
 
@@ -145,5 +144,15 @@ ul li{
     transform: translateX(-50px);
     opacity: 1;
   }
+}
+a{
+  position: fixed;
+  bottom: 5px;
+  right: 10px;
+  padding: 10px;
+  color: white;
+  text-decoration: none;
+  border-radius: 10px;
+  background: rgb(0, 174, 255);
 }
 </style>
