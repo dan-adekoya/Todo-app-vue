@@ -10,7 +10,7 @@
     <ul>
       <li v-for="todo in todos" :key="todo">{{todo.title}} <button @click="remove(todo)" class="submit">Done</button></li>
     </ul>
-    <a href="https://github.com/dan-adekoya/Todo-app-vue" target="_blank">Repo link</a>
+    <a href="https://github.com/dan-adekoya/Todo-app-vue" target="_blank">Repo Link</a>
   </div>
 </template>
 
