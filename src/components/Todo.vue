@@ -2,7 +2,10 @@
   <div id="Todo">
     <h1>Todo-App</h1>
     <form @submit.prevent="add">
-      <input v-model="NTodo" @submit="prevent" ref="input" type="text" placeholder="What you doing ?">
+      <div>
+        <input v-model="empty" @submit="add" ref="input" type="text" placeholder="What you doing ?">
+        <p v-if="error" class="error">Input a Todo</p>
+      </div>
       <button class="submit" type="submit">Task</button>
       <button class="clear" type="reset">Clear Input</button>
       <button class="clear" type="reset"  @click="removeAll()">Clear All Todos</button>
@@ -10,7 +13,7 @@
     <ul>
       <li v-for="todo in todos" :key="todo">{{todo.title}} <button @click="remove(todo)" class="submit">Done</button></li>
     </ul>
-    <a href="https://github.com/dan-adekoya/Todo-app-vue" target="_blank">Repo Link</a>
+    <a href="https://github.com/devdanielcodes/Todo-app-vue" target="_blank">Repo Link</a>
   </div>
 </template>
 
@@ -18,40 +21,48 @@
 export default {
   data(){
     return{
-      NTodo:'',
+      empty: '',
       todos:[],
+      error: false
     }
   },
   methods: {
     add(){
-      this.todos.push({
-        title: this.NTodo
-      })
-      this.NTodo = ''
+      if(this.empty == ''){
+        this.error = true
+      }else{
+        this.todos.push({
+        title: this.empty
+        })
+        this.empty = ''
+        this.error = false
+      }
+      
     },
-    remove(todo){
-        let todoIndex = this.todos.indexOf(todo)
+    remove(x){
+        let todoIndex = this.todos.indexOf(x)
         this.todos.splice(todoIndex, 1)
     },
     removeAll(){
         this.todos.splice(0)
     },
     clear(){
-      this.NTodo = ''
+      this.empty = ''
+      this.empty.focus()
     },
-    prevent(){
-      if(this.$refs.input.value == ""){
-        this.todo = false
+    /* prevent(){
+      if(this.todos.title == ''){
+        this.stop()
       }
-    }
+    } */
   }
 }
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-#Todo{
-  font-family: 'roboto'
+*{
+  font-family: 'roboto', sans-serif;
 }
 h1{
   text-align: center;
@@ -103,6 +114,7 @@ form input{
   font-size: 17px;
   border-radius: 10px;
   outline: none;
+  margin-bottom: 10px;
 }
 ul{
   width: 80%;
@@ -122,7 +134,9 @@ ul li{
   opacity: 1;
   border: 1px solid #D7D7D7;
   animation: added .4s 0s 1 forwards
-
+}
+.error{
+  color: red;
 }
 @keyframes added {
   from{
